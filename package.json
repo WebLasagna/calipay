@@ -1,0 +1,16 @@
+{
+  "name": "calipay",
+  "version": "1.0.0",
+  "description": "A wrapper bot for the Califorcraft API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Lasgna#1019",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "discord.js": "^12.1.1",
+    "dotenv": "^8.2.0"
+  }
+}
