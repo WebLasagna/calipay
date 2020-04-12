@@ -18,7 +18,10 @@ bot.on("message", message => {
 	const command = args.shift().toLowerCase();
   const allargs = message.content.slice(pre.length + command.length).trim();
 
-  if (command === 'e' || command === 'eval') {
+  if(command === 'p' || command === 'ping') {
+    message.channel.send("Pong ! 🏓" + `(${Date.now() - message.createdTimestamp} ms)`);
+  }
+  else if (command === 'e' || command === 'eval') {
     if(message.author.id !== "432508632370774026") return
     function clean(text) {
       if (typeof(text) === "string") 
