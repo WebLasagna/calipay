@@ -47,12 +47,16 @@ bot.on("message", message => {
       }
     };
     message.channel.send({ embed: embed });
-    message.channel.send(`**$help** - Affiche la liste des commandes\n**$creer** ($c) *montant* *pseudo* *motif* (facultatif) - Crée une page de paiement\n**$verifier** ($v) *URL du paiement* - Vérifie le statut d'un paiement\n**$invit** - Affiche le lien d'invitation du bot\n**$github** - Affiche le lien du repo GitHub du bot (code source)`)
+    message.channel.send(`**$help** - Affiche la liste des commandes\n**$creer** ($c) *montant* *pseudo* *motif* - Crée une page de paiement\n**$verifier** ($v) *URL du paiement* - Vérifie le statut d'un paiement\n**$invit** - Affiche le lien d'invitation du bot\n**$github** - Affiche le lien du repo GitHub du bot (code source)`)
   }
   else if(command === 'c' || command === 'créer' || command === 'creer' || command === 'create') {
     const amount = args[0]
     const receiver = args[1]
     const details = allargs.slice(args[0].length+args[1].length+2)
+    if(!amount || !receiver || !details) {
+      message.channel.send('❌ Veuillez renseigner le montant, le pseudo du récepteur du paiement et le motif du paiement.')
+      return
+    }
 
     const params = {
       amount: amount,
@@ -77,6 +81,9 @@ bot.on("message", message => {
   }
   else if(command === 'v' || command === 'vérifier' || command === 'verifier' || command === 'check') {
     const url = args[0]
+    if(!url) {
+      message.channel.send("❌ Veuillez renseigner l'URL de la page de paiement.")
+    }
 
     const params = {
       token: url.slice('https://califorcraft.eu/api/payment/'.length)
