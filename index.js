@@ -6,7 +6,7 @@ const bot = new Discord.Client();
 var pre = '$'
 
 bot.on("ready", () => {
-  bot.user.setActivity(`$help | sur ${bot.guilds.size} serveurs`, {type:"WATCHING"})
+  bot.user.setActivity('$help', {type:"WATCHING"})
   console.log("Prêt !");
 })
 
