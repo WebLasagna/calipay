@@ -17,6 +17,14 @@ $ cd calipay
 $ npm install
 ```
 
+#### Config
+
+Create a .env file and add your bot token as an environment variable.
+
+```
+BOT_TOKEN=your_bot_token_goes_here
+```
+
 #### Start
 
 ```bash
