@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Lasgna#1019",
-  "license": "ISC",
+  "author": "Lasagna#1019",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
     "discord.js": "^12.1.1",
