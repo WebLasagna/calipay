@@ -18,10 +18,12 @@ bot.on("message", message => {
 	const command = args.shift().toLowerCase();
   const allargs = message.content.slice(pre.length + command.length).trim();
 
-  if(command === 'p' || command === 'ping') {
-    message.channel.send("Pong ! 🏓 " + `(${Date.now() - message.createdTimestamp} ms)`);
+  if(['ping', 'p'].includes(command)) {
+    message.channel.send("🏓 Pong !").then(pingMsg => {
+      pingMsg.edit(`🏓 Pong ! (${pingMsg.createdTimestamp - message.createdTimestamp} ms)`)
+    })
   }
-  else if (command === 'e' || command === 'eval') {
+  else if (['eval', 'e'].includes(command)) {
     if(message.author.id !== "432508632370774026") return
     function clean(text) {
       if (typeof(text) === "string") 
@@ -39,10 +41,10 @@ bot.on("message", message => {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``)
     }
   }
-  else if(command === 'a' || command === 'h' || command === 'aide' || command === 'help') {
+  else if(['help', 'h', 'aide', 'a']) {
     const embed = {
       "title": "**Liste des commandes**",
-      "description": "**$help** - Affiche la liste des commandes\n**$creer** ($c) *montant* *pseudo* *motif* - Crée une page de paiement\n**$verifier** ($v) *URL du paiement* - Vérifie le statut d'un paiement\n**$invit** - Affiche le lien d'invitation du bot\n**$github** - Affiche le lien du repo GitHub du bot (code source)",
+      "description": "**$aide** - Affiche la liste des commandes\n**$creer** ($c) *montant* *pseudo* *motif* - Crée une page de paiement\n**$verifier** ($v) *URL du paiement* - Vérifie le statut d'un paiement\n**$invit** - Affiche le lien d'invitation du bot\n**$github** - Affiche le lien du repo GitHub du bot (code source)",
       "color": 3265343,
       "footer": {
         "icon_url": "https://lasagna.cf/icon.png",
@@ -51,7 +53,7 @@ bot.on("message", message => {
     };
     message.channel.send({ embed: embed })
   }
-  else if(command === 'c' || command === 'créer' || command === 'creer' || command === 'create') {
+  else if(['create', 'c', 'créer', 'creer'].includes(command)) {
     const amount = args[0]
     const receiver = args[1]
     const details = allargs.slice(args[0].length+args[1].length+2)
@@ -81,7 +83,7 @@ bot.on("message", message => {
       message.channel.send(`Page de paiement créée : <https://califorcraft.eu/api/payment/${res.data.data.token}>`)
     })
   }
-  else if(command === 'v' || command === 'vérifier' || command === 'verifier' || command === 'check') {
+  else if(['check', 'c', 'vérifier', 'verifier', 'v'].includes(command)) {
     const url = args[0]
     if(!url) {
       message.channel.send("❌ Veuillez renseigner l'URL de la page de paiement.")
@@ -114,10 +116,10 @@ bot.on("message", message => {
       message.channel.send(msg)
     })
   }
-  else if(command === 'i' || command === 'invit' || command === 'invite' || command === 'invitation') {
+  else if(['invite', 'i', 'invitation', 'invit'].includes(command)) {
     message.channel.send('<https://discordapp.com/api/oauth2/authorize?client_id=694002979287728241&permissions=2048&scope=bot>')
   }
-  else if(command === 'g' || command === 'github') {
+  else if(['github', 'g'].includes(command)) {
     message.channel.send('https://github.com/WebLasagna/calipay')
   }
 });
